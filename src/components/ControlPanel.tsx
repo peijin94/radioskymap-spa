@@ -55,9 +55,6 @@ export function ControlPanel(props: ControlPanelProps) {
     <aside className="control-panel">
       <div className="panel-card">
         <h1>Radio Sky Map</h1>
-        <p className="panel-card__intro">
-          Static, client-side sky projection for bright radio calibrators and solar-system bodies.
-        </p>
       </div>
 
       <div className="panel-card">
