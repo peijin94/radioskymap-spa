@@ -1,6 +1,6 @@
 import { mapProjectedPointToSvg } from '../lib/projections';
 import { segmentsToSmoothSvgPath } from '../lib/tracks';
-import type { ProjectedPoint, Source } from '../types';
+import type { ProjectedPoint, ProjectionMode, Source } from '../types';
 import { SourceMarker } from './SourceMarker';
 
 export interface RenderedSource {
@@ -9,6 +9,7 @@ export interface RenderedSource {
 }
 
 interface SkyPlotProps {
+  projectionMode: ProjectionMode;
   projectionLabel: string;
   siteName: string;
   timestampLabel: string;
@@ -26,6 +27,22 @@ export function SkyPlot(props: SkyPlotProps) {
   const center = VIEWBOX_SIZE / 2;
   const radius = center - PLOT_MARGIN;
   const ringFractions = [0.25, 0.5, 0.75, 1];
+  const scaleLabels =
+    props.projectionMode === 'sin'
+      ? [
+          { fraction: 0, label: '0' },
+          { fraction: 0.25, label: '0.25' },
+          { fraction: 0.5, label: '0.5' },
+          { fraction: 0.75, label: '0.75' },
+          { fraction: 1, label: '1' },
+        ]
+      : [
+          { fraction: 0, label: '0°' },
+          { fraction: 0.25, label: '22.5°' },
+          { fraction: 0.5, label: '45°' },
+          { fraction: 0.75, label: '67.5°' },
+          { fraction: 1, label: '90°' },
+        ];
 
   const svgSources = props.renderedSources.map((entry) => ({
     ...entry,
@@ -103,6 +120,17 @@ export function SkyPlot(props: SkyPlotProps) {
               y2={center + radius}
               className="sky-plot__axis"
             />
+
+            {scaleLabels.map((entry) => (
+              <text
+                key={entry.label}
+                x={center + 14}
+                y={center - radius * entry.fraction - (entry.fraction === 0 ? 10 : 6)}
+                className="sky-plot__scale-label"
+              >
+                {entry.label}
+              </text>
+            ))}
 
             <circle cx={center} cy={center} r={radius} className="sky-plot__boundary" />
 

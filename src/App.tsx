@@ -95,6 +95,7 @@ function App() {
   return (
     <main className="app-shell">
       <SkyPlot
+        projectionMode={projectionMode}
         projectionLabel={projectionMode === 'sin' ? 'Sin' : 'Azimuthal'}
         siteName={selectedSite.name}
         timestampLabel={timestampLabel}

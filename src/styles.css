@@ -141,9 +141,15 @@ button {
   stroke-width: 4;
 }
 
+.sky-plot__scale-label {
+  fill: #69839c;
+  font-size: 20px;
+  font-weight: 500;
+}
+
 .sky-plot__track {
   fill: none;
-  stroke: #5b91ec;
+  stroke: #e48a2c;
   stroke-width: 4;
   stroke-linecap: round;
   stroke-linejoin: round;
@@ -181,6 +187,11 @@ button {
   stroke: #123e73;
 }
 
+.source-marker__dot--sun {
+  fill: #e48a2c;
+  stroke: #9d5710;
+}
+
 .source-marker__label {
   fill: #173350;
   font-size: 24px;
@@ -213,7 +224,7 @@ button {
 }
 
 .plot-legend__sample--sun-track {
-  border-top-color: #5b91ec;
+  border-top-color: #e48a2c;
   border-top-style: dashed;
 }
 

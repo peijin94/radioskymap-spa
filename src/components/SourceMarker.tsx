@@ -12,6 +12,7 @@ const LABEL_PADDING = 24;
 
 export function SourceMarker({ source, point, showLabel, plotCenter, plotRadius }: SourceMarkerProps) {
   const isDynamic = source.kind === 'dynamic';
+  const isSun = source.bodyId === 'sun';
   const labelX = point.x + (source.labelDx ?? 8);
   const labelY = point.y + (source.labelDy ?? -8);
   const dxFromCenter = labelX - plotCenter;
@@ -31,7 +32,13 @@ export function SourceMarker({ source, point, showLabel, plotCenter, plotRadius 
         cx={point.x}
         cy={point.y}
         r={isDynamic ? 6 : 4.5}
-        className={isDynamic ? 'source-marker__dot source-marker__dot--dynamic' : 'source-marker__dot'}
+        className={
+          isSun
+            ? 'source-marker__dot source-marker__dot--sun'
+            : isDynamic
+              ? 'source-marker__dot source-marker__dot--dynamic'
+              : 'source-marker__dot'
+        }
       />
       {showLabel ? (
         <text
